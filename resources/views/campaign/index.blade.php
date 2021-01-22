@@ -4,9 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>bloop | Council Emailer</title>
+        <title>{{ $campaign->getTitle() }} | Council Emailer</title>
     </head>
     <body>
-       hello
+       <h3>{{ $campaign->getTitle() }}</h3>
+
+       <p>org is {{ $campaign->getOrgName() }}</p>
+       <p>email is {{ $campaign->getOrgEmail() }}</p>
+       <p>talking points are:</p>
+       <ul>      
+       </ul>
     </body>
 </html>

@@ -5,8 +5,8 @@ return [
     'title' => 'Racial Equity Plan',
 
     // local organization that's working on this issue
-    'organization-name' => 'Local group name',
-    'organization-email' => 'rachel.vecchitto@gmail.com',
+    'org-name' => 'Local group name',
+    'org-email' => 'rachel.vecchitto@gmail.com',
 
     'talking-points' => [
         "Hello I am a talking point",
