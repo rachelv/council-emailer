@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Campaign;
-use Illuminate\Support\Facades\Log;
 
 class CampaignController extends Controller
 {
@@ -12,15 +10,15 @@ class CampaignController extends Controller
      * @param  string  $slug
      * @return \Illuminate\View\View
      */
-    public function campaign($slug)
+    public function campaign(string $slug)
     {
         $baseKey = "campaigns.{$slug}";
 
-        if(!config()->has($baseKey)) {
+        if (!config()->has($baseKey)) {
             abort(404);
         }
 
-        $campaign = Campaign::loadFromConfig($baseKey);
+        $campaign = Campaign::loadFromConfig($slug, config($baseKey));
 
         return view('campaign.index', [
             'campaign' => $campaign

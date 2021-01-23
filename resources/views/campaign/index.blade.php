@@ -7,12 +7,15 @@
         <title>{{ $campaign->getTitle() }} | Council Emailer</title>
     </head>
     <body>
-       <h3>{{ $campaign->getTitle() }}</h3>
+        <h3>{{ $campaign->getTitle() }}</h3>
 
-       <p>org is {{ $campaign->getOrgName() }}</p>
-       <p>email is {{ $campaign->getOrgEmail() }}</p>
-       <p>talking points are:</p>
-       <ul>      
-       </ul>
+        <p>org is {{ $campaign->getOrgName() }}</p>
+        <p>email is {{ $campaign->getOrgEmail() }}</p>
+        <p>talking points are:</p>
+        <ul>
+            @foreach ($campaign->getTalkingPoints() as $talkingPoint)
+                <li>{{ $talkingPoint }}</li>
+            @endforeach
+        </ul>
     </body>
 </html>
