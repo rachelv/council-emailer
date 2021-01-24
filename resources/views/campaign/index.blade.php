@@ -17,9 +17,9 @@
     <x-slot name="title">{{ $campaign->getTitle() }}</x-slot>
 
     <h3>{{ $campaign->getTitle() }}</h3>
-    
-    <p>org is {{ $campaign->getOrgName() }}</p>
-    <p>email is {{ $campaign->getOrgEmail() }}</p>
+
+    <p>org working on this issue locally is: {{ $campaign->getOrgName() }}</p>
+    <p>email for this group is: {{ $campaign->getOrgEmail() }}</p>
     <p>talking points are:</p>
     <ul>
         @foreach ($campaign->getTalkingPoints() as $talkingPoint)
