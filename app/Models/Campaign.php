@@ -11,6 +11,7 @@ class Campaign
     private string $slug = '';
     private string $orgName = '';
     private string $orgEmail = '';
+    private array $exampleSubjects = [];
     private array $talkingPoints = [];
 
     public static function loadFromConfig(string $slug, array $config): Campaign
@@ -20,6 +21,7 @@ class Campaign
         $campaign->setTitle($config['title']);
         $campaign->setOrgName($config['org-name']);
         $campaign->setOrgEmail($config['org-email']);
+        $campaign->setExampleSubjects($config['example-subjects']);
         $campaign->setTalkingPoints($config['talking-points']);
 
         return $campaign;
@@ -68,6 +70,16 @@ class Campaign
     public function getOrgEmail(): string
     {
         return $this->orgEmail;
+    }
+
+    public function setExampleSubjects(array $exampleSubjects): void
+    {
+        $this->exampleSubjects = $exampleSubjects;
+    }
+
+    public function getExampleSubjects(): Collection
+    {
+        return collect($this->exampleSubjects);
     }
 
     public function setTalkingPoints(array $talkingPoints): void

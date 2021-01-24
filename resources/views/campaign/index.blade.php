@@ -18,12 +18,48 @@
 
     <h3>{{ $campaign->getTitle() }}</h3>
 
-    <p>org working on this issue locally is: {{ $campaign->getOrgName() }}</p>
-    <p>email for this group is: {{ $campaign->getOrgEmail() }}</p>
     <p>talking points are:</p>
     <ul>
         @foreach ($campaign->getTalkingPoints() as $talkingPoint)
             <li>{{ $talkingPoint }}</li>
         @endforeach
     </ul>
+
+    <form>
+        <p>To:</p>
+        <p><input type="text" name="to-email" value="{{ config('council-emailer.full-council-email') }}" readonly/></p>
+        <p>Please note that all emails to {{ config('council-emailer.full-council-email') }} are public record and can be downloaded from Boulder's <a href="{{ config('council-emailer.open-data-catalog-url') }}" target="_blank">Open Data Catalog</a>.</p>
+
+        <p>From:</p>
+        <p><input type="text" name="from-email" value="" placeholder="your email address"/></p>
+
+        <p>Subject:</p>
+        <p><input type="text" name="subject" value=""/></p>
+        <p>Use/tweak one of our example subjects or write your own:</p>
+        <ul>
+            @foreach ($campaign->getExampleSubjects() as $subject)
+                <li>{{ $subject }}</li>
+            @endforeach
+        </ul>
+
+        <p>Email:</p>
+        <textarea name="email-body">
+{{ config('council-emailer.email-recipe') }}
+        </textarea>
+
+        <p>
+            <input type="checkbox" id="cc-sender" name="cc-sender" value="true" checked>
+            <label for="cc-sender">Send me a copy of my email</label>
+        </p>
+
+        <p>
+            <input type="checkbox" id="cc-local-org" name="cc-local-org" value="true" checked>
+            <label for="cc-local-org">Share my email address with {{ $campaign->getOrgName() }} ({{ $campaign->getOrgEmail() }}) to help them with future organizing efforts</label>
+        </p>
+
+        <p>
+            <input type="submit" value="Send Email"/>
+        </p>
+
+    </form>
 </x-layout>
