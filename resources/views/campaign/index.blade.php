@@ -16,7 +16,9 @@
 <x-layout>
     <x-slot name="title">{{ $campaign->getTitle() }}</x-slot>
 
-    <h3>{{ $campaign->getTitle() }}</h3>
+    <a class="text-sm mb-3 block" href="{{ route('index') }}">&larr; All Campaigns</a>
+
+    <h1>{{ $campaign->getTitle() }}</h1>
 
     <p>talking points are:</p>
     <ul>
@@ -58,7 +60,7 @@
         </p>
 
         <p>
-            <input type="submit" value="Send Email"/>
+            <button type="submit">Send Email</button>
         </p>
 
     </form>

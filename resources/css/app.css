@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+h1 {
+    @apply text-2xl;
+    @apply mb-3;
+}
+h2 {
+    @apply text-xl;
+}
+h3 {
+    @apply text-lg;
+}
+h1, h2, h3 {
+    font-weight: bold;
+}
+
+a {
+    @apply text-blue-700;
+    @apply underline;
+}

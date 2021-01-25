@@ -1,7 +1,7 @@
 <x-layout>
     <x-slot name="title">All Campaigns</x-slot>
 
-    <h3>All Campaigns</h3>
+    <h1>All Campaigns</h1>
 
     <ul>
         @foreach ($campaigns as $campaign)
