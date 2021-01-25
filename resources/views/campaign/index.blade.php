@@ -20,48 +20,79 @@
 
     <h1>{{ $campaign->getTitle() }}</h1>
 
-    <p>talking points are:</p>
-    <ul>
-        @foreach ($campaign->getTalkingPoints() as $talkingPoint)
-            <li>{{ $talkingPoint }}</li>
-        @endforeach
-    </ul>
+    <div class="flex flex-wrap">
 
-    <form>
-        <p>To:</p>
-        <p><input type="text" name="to-email" value="{{ config('council-emailer.full-council-email') }}" readonly/></p>
-        <p>Please note that all emails to {{ config('council-emailer.full-council-email') }} are public record and can be downloaded from Boulder's <a href="{{ config('council-emailer.open-data-catalog-url') }}" target="_blank">Open Data Catalog</a>.</p>
+        <div class="grid grid-cols-1 md:grid-cols-2">
+            {{-- to--}}
+            <div class="p-2 bg-gray-100">
+                <label>To</label>
+                <input type="text" name="to-email" class="mt-1 block w-full" value="{{ config('council-emailer.full-council-email') }}" readonly="readonly"/>
+            </div>
+            <div class="p-2 bg-gray-100">
+                Please note that all emails to {{ config('council-emailer.full-council-email') }} are public record and can be downloaded from Boulder's <a href="{{ config('council-emailer.open-data-catalog-url') }}" target="_blank">Open Data Catalog</a>.
+            </div>
 
-        <p>From:</p>
-        <p><input type="text" name="from-email" value="" placeholder="your email address"/></p>
+            {{-- from--}}
+            <div class="p-2 bg-white">
+                <label>From</label>
+                <input type="text" name="from-name" class="mt-1 block w-full" value="" placeholder="your name"/>
+                <input type="text" name="from-email" class="mt-1 block w-full" value="" placeholder="your email address"/>
+            </div>
+            <div class="p-2 bg-white">
+                Including your real name is optional but adds credibility to your email.
+            </div>
 
-        <p>Subject:</p>
-        <p><input type="text" name="subject" value=""/></p>
-        <p>Use/tweak one of our example subjects or write your own:</p>
-        <ul>
-            @foreach ($campaign->getExampleSubjects() as $subject)
-                <li>{{ $subject }}</li>
-            @endforeach
-        </ul>
+            {{-- subject --}}
+            <div class="p-2 bg-gray-100">
+                <label>Subject</label>
+                <input type="text" name="subject" class="mt-1 block w-full" value=""/>
+            </div>
+            <div class="p-2 bg-gray-100">
+                Use/modify one of our example subjects or write your own. A unique subject is helpful.
+                <ul>
+                    @foreach ($campaign->getExampleSubjects() as $subject)
+                        <li>{{ $subject }}</li>
+                    @endforeach
+                </ul>
+            </div>
 
-        <p>Email:</p>
-        <textarea name="email-body">
+            {{-- email body --}}
+            <div class="p-2 bg-white">
+                <label>Message</label>
+                <textarea name="email-body" class="mt-1 block w-full h-72">
 {{ config('council-emailer.email-recipe') }}
-        </textarea>
+                </textarea>
+            </div>
+            <div class="p-2 bg-white">
+                Talking points:
+                <ul>
+                    @foreach ($campaign->getTalkingPoints() as $talkingPoint)
+                        <li>{{ $talkingPoint }}</li>
+                    @endforeach
+                </ul>
+            </div>
 
-        <p>
-            <input type="checkbox" id="cc-sender" name="cc-sender" value="true" checked>
-            <label for="cc-sender">Send me a copy of my email</label>
-        </p>
+            {{-- checkboxes --}}
+            <div class="p-2 bg-gray-100">
+                <label for="cc-sender" class="block">
+                    <input type="checkbox" id="cc-sender" name="cc-sender" value="true" checked>
+                    Send me a copy of my email
+                </label>
 
-        <p>
-            <input type="checkbox" id="cc-local-org" name="cc-local-org" value="true" checked>
-            <label for="cc-local-org">Share my email address with {{ $campaign->getOrgName() }} ({{ $campaign->getOrgEmail() }}) to help them with future organizing efforts</label>
-        </p>
+                <label for="cc-local-org" class="block">
+                    <input type="checkbox" id="cc-local-org" name="cc-local-org" value="true" checked>
+                    Share my email address with {{ $campaign->getOrgName() }}
+                </label>
+            </div>
+            <div class="p-2 bg-gray-100">
+                Sharing your email with {{ $campaign->getOrgName() }} ({{ $campaign->getOrgEmail() }}) helps with future organizing efforts related to this campaign.
+            </div>
 
-        <p>
-            <button type="submit">Send Email</button>
-        </p>
+            <div class="p-2 pt-4 bg-white">
+                <button type="submit" class="bg-blue-600 hover:bg-blue-900 text-white font-bold py-2 px-5 rounded">Send Email</button>
+            </div>
+        </div>
 
-    </form>
+    </div>
+
 </x-layout>
