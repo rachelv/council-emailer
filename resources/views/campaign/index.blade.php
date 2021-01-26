@@ -27,7 +27,7 @@
             <input type="text" name="from-email" class="mt-1 block w-full" value="" placeholder="your email address"/>
         </x-slot>
         <x-slot name="tip">
-            Including your real name is optional but adds credibility to your email.
+            Including your real name is optional but adds credibility to your email. Your email address is required.
         </x-slot>
     </x-form-row>
 
