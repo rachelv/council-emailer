@@ -9,7 +9,7 @@
 
     {{-- to--}}
     <x-form-row>
-        <x-slot name="color">gray-100</x-slot>
+        <x-slot name="shaded">true</x-slot>
         <x-slot name="form">
             <label>To</label>
             <input type="text" name="to-email" class="mt-1 block w-full" value="{{ config('council-emailer.full-council-email') }}" readonly="readonly"/>
@@ -21,7 +21,6 @@
 
     {{-- from--}}
     <x-form-row>
-        <x-slot name="color">white</x-slot>
         <x-slot name="form">
             <label>From</label>
             <input type="text" name="from-name" class="mt-1 block w-full" value="" placeholder="your name"/>
@@ -34,7 +33,7 @@
 
     {{-- subject --}}
     <x-form-row>
-        <x-slot name="color">gray-100</x-slot>
+        <x-slot name="shaded">true</x-slot>
         <x-slot name="form">
             <label>Subject</label>
             <input type="text" name="subject" class="mt-1 block w-full" value=""/>
@@ -51,7 +50,6 @@
 
     {{-- email body --}}
     <x-form-row>
-        <x-slot name="color">white</x-slot>
         <x-slot name="form">
             <label>Message</label>
             <textarea name="email-body" class="mt-1 block w-full h-72">
@@ -70,7 +68,7 @@
 
     {{-- checkboxes --}}
     <x-form-row>
-        <x-slot name="color">gray-100</x-slot>
+        <x-slot name="shaded">true</x-slot>
         <x-slot name="form">
             <label for="cc-sender" class="block">
                 <input type="checkbox" id="cc-sender" name="cc-sender" value="true" checked>
