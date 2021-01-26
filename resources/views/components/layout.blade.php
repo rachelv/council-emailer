@@ -8,8 +8,6 @@
         <title>{{ $title }} | Council Emailer</title>
     </head>
     <body class="text-gray-800 font-sans">
-        <div class="container px-6 py-6 md:px-10 lg:px-14">
-            {{ $slot }}
-        </div>
+        {{ $slot }}
     </body>
 </html>
