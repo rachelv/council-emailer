@@ -22,7 +22,11 @@ class Controller extends BaseController
         $campaigns = collect();
 
         foreach ($allCampaigns as $slug => $configData) {
-            $campaigns->push(Campaign::loadFromConfig($slug, $configData));
+            /** @var $campaign Campaign */
+            $campaign = Campaign::loadFromConfig($slug, $configData);
+            if ($campaign->getActive()) {
+                $campaigns->push($campaign);
+            }
         }
 
         return view('index', [

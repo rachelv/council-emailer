@@ -1,6 +1,10 @@
 <?php
 // until we have a database, every campaign gets a config file in this format
 return [
+    // active campaigns are showed in the list on the index page
+    // any campaign can be accessed directly via URL whether it's active or not
+    'active' => 1,
+
     // name of this letter writing campaign
     'title' => 'Racial Equity Plan',
 

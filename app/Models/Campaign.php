@@ -7,6 +7,7 @@ use Illuminate\Support\Collection;
 // "fake" model, does not sit on top of a database table for now
 class Campaign
 {
+    private bool $active = false;
     private string $title = '';
     private string $slug = '';
     private string $orgName = '';
@@ -18,6 +19,7 @@ class Campaign
     {
         $campaign = new Campaign();
         $campaign->setSlug($slug);
+        $campaign->setActive(boolval($config['active']));
         $campaign->setTitle($config['title']);
         $campaign->setOrgName($config['org-name']);
         $campaign->setOrgEmail($config['org-email']);
@@ -40,6 +42,16 @@ class Campaign
     public function getSlug(): string
     {
         return $this->slug;
+    }
+
+    public function setActive(bool $active): void
+    {
+        $this->active = $active;
+    }
+
+    public function getActive(): bool
+    {
+        return $this->active;
     }
 
     public function setTitle(string $title): void
