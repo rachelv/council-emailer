@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Config;
 use Illuminate\Support\Collection;
 
 // "fake" model, does not sit on top of a database table for now
@@ -15,16 +16,16 @@ class Campaign
     private array $exampleSubjects = [];
     private array $talkingPoints = [];
 
-    public static function loadFromConfig(string $slug, array $config): Campaign
+    public static function loadFromConfig(string $slug): Campaign
     {
         $campaign = new Campaign();
         $campaign->setSlug($slug);
-        $campaign->setActive(boolval($config['active']));
-        $campaign->setTitle($config['title']);
-        $campaign->setOrgName($config['org-name']);
-        $campaign->setOrgEmail($config['org-email']);
-        $campaign->setExampleSubjects($config['example-subjects']);
-        $campaign->setTalkingPoints($config['talking-points']);
+        $campaign->setActive(boolval(Config::getCampaignConfig($slug, 'active')));
+        $campaign->setTitle(Config::getCampaignConfig($slug, 'title'));
+        $campaign->setOrgName(Config::getCampaignConfig($slug, 'org-name'));
+        $campaign->setOrgEmail(Config::getCampaignConfig($slug, 'org-email'));
+        $campaign->setExampleSubjects(Config::getCampaignConfig($slug, 'example-subjects'));
+        $campaign->setTalkingPoints(Config::getCampaignConfig($slug, 'talking-points'));
 
         return $campaign;
     }
@@ -32,6 +33,11 @@ class Campaign
     public function getUrl(): string
     {
         return route('campaign', ['slug' => $this->getSlug()]);
+    }
+
+    public function getRandomSubject(): string
+    {
+        return collect($this->exampleSubjects)->random();
     }
 
     public function setSlug(string $slug): void

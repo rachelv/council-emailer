@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Config;
 use App\Models\Campaign;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -17,13 +18,13 @@ class Controller extends BaseController
      */
     public function index()
     {
-        $allCampaigns = config('campaigns');
+        $allCampaigns = Config::getAllCampaignKeys();
 
         $campaigns = collect();
 
-        foreach ($allCampaigns as $slug => $configData) {
+        foreach ($allCampaigns as $slug) {
             /** @var $campaign Campaign */
-            $campaign = Campaign::loadFromConfig($slug, $configData);
+            $campaign = Campaign::loadFromConfig($slug);
             if ($campaign->getActive()) {
                 $campaigns->push($campaign);
             }
