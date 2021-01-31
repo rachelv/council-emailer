@@ -42,8 +42,8 @@ button:disabled {
     @apply rounded;
 }
 
-.text-input-error {
-    @apply border-red-600;
+.text-error {
+    @apply text-red-600;
 }
 
 .error-message {

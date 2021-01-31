@@ -15,7 +15,8 @@ return [
     'example-subjects' => [
         'Hello I have thoughts on equity',
         'Please take my email seriously',
-        'Example subject 3'
+        'Example subject 3',
+        'Example subject 4'
     ],
 
     'talking-points' => [

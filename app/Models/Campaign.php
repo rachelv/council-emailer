@@ -35,11 +35,6 @@ class Campaign
         return route('campaign', ['slug' => $this->getSlug()]);
     }
 
-    public function getRandomSubject(): string
-    {
-        return collect($this->exampleSubjects)->random();
-    }
-
     public function setSlug(string $slug): void
     {
         $this->slug = $slug;
@@ -98,6 +93,11 @@ class Campaign
     public function getExampleSubjects(): Collection
     {
         return collect($this->exampleSubjects);
+    }
+
+    public function getExampleSubjectsJson(): string
+    {
+        return json_encode($this->exampleSubjects);
     }
 
     public function setTalkingPoints(array $talkingPoints): void

@@ -4,10 +4,12 @@ new Vue({
     el: '#v-council-form',
     data: {
         fromEmail: '',
-
         hasValidEmail: false,
         showEmailError: false,
 
+        exampleSubjects: [],
+        subject: '',
+        subjectIdx: 0,
         hasValidSubject: false,
         hasValidMessage: false,
     },
@@ -18,15 +20,34 @@ new Vue({
     },
     methods: {
         isEmailValid: function() {
-            if (this.fromEmail.length > 6) {
-                if (!this.validateEmail(this.fromEmail)) {
-                    this.hasValidEmail = false;
-                    this.showEmailError = true;
-                    return;
-                }
+            /*
+            if (this.fromEmail.length > 6 && !this.validateEmail(this.fromEmail)) {
+
+            } else if () {
+
             }
-            this.hasValidEmail = true;
-            this.showEmailError = false;
+            */
+        },
+
+        updateSubject: function() {
+            this.subjectIdx += 1;
+            if (this.subjectIdx == this.exampleSubjects.length) {
+                this.subjectIdx = 0;
+            }
+
+            this.subject = this.exampleSubjects[this.subjectIdx];
+        },
+
+        initializeSubjects: function(exampleSubjects) {
+            // this seems to get called on every dom interaction
+            // clearly this is not the best way to do this but not sure of another way without making this a component
+            if (this.exampleSubjects.length == 0) {
+                this.exampleSubjects =  exampleSubjects;
+
+                // initialize a random subject and save the index of that subject so we can cycle through later
+                this.subjectIdx = Math.floor(Math.random() * this.exampleSubjects.length);
+                this.subject = this.exampleSubjects[this.subjectIdx];
+            }
         },
 
         validateEmail: function(email) {

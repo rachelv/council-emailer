@@ -6,7 +6,7 @@
         <h1>{{ $campaign->getTitle() }}</h1>
     </div>
 
-    <div id="v-council-form">
+    <div id="v-council-form" :initializeSubjects="initializeSubjects({{ $campaign->getExampleSubjectsJson() }})">
         <form>
             {{-- to--}}
             <x-form-row>
@@ -23,10 +23,10 @@
             {{-- from--}}
             <x-form-row>
                 <x-slot name="form">
-                    <label>From</label>
+                    <label :class="{ 'text-error': showEmailError }">From</label>
                     <input type="text" name="from-name" class="mt-1 text-input" value="" placeholder="your name"/>
                     <input v-on:keyup="isEmailValid" v-model="fromEmail" type="text" name="from-email" class="mt-1 text-input" placeholder="your email address"/>
-                    <div  v-if="showEmailError" class="mt-1 error-message">Please enter a valid email address.</div>
+                    <div v-if="showEmailError" class="mt-1 error-message">Please enter a valid email address.</div>
                 </x-slot>
                 <x-slot name="tip">
                     Including your real name is optional but adds credibility to your email. Your email address is required.
@@ -38,7 +38,8 @@
                 <x-slot name="shaded">true</x-slot>
                 <x-slot name="form">
                     <label>Subject</label>
-                    <input type="text" name="subject" class="mt-1 text-input" value="{{ $campaign->getRandomSubject() }}"/>
+                    <input type="text" name="subject" class="mt-1 text-input" v-model="subject"/>
+                    <div class="mt-1 ml-1 text-sm"><a v-on:click.prevent="updateSubject" href="#">Use a different subject</a></div>
                 </x-slot>
                 <x-slot name="tip">
                     Use or modify one of our example subjects, or write your own. A unique subject makes your email much more likely to be read.
