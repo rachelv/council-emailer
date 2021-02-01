@@ -7,7 +7,7 @@
     </div>
 
     <div id="v-council-form" :initializeSubjects="initializeSubjects({{ $campaign->getExampleSubjectsJson() }})">
-        <form>
+        <form method="POST" action="{{ route('campaignSendEmail', ['slug' => $campaign->getSlug()]) }}">
             {{-- to--}}
             <x-form-row>
                 <x-slot name="shaded">true</x-slot>
@@ -25,11 +25,11 @@
                 <x-slot name="form">
                     <label :class="{ 'text-error': showEmailError }">From</label>
                     <input type="text" name="from-name" class="mt-1 text-input" value="" placeholder="your name"/>
-                    <input v-on:keyup="isEmailValid" v-model="fromEmail" type="text" name="from-email" class="mt-1 text-input" placeholder="your email address"/>
+                    <input v-on:keyup="isEmailValid" v-model="fromEmail" type="text" name="from-email" class="mt-1 text-input" placeholder="your email address (required)"/>
                     <div v-if="showEmailError" class="mt-1 error-message">Please enter a valid email address.</div>
                 </x-slot>
                 <x-slot name="tip">
-                    Including your real name is optional but adds credibility to your email. Your email address is required.
+                    Including your real name is optional but adds credibility to your email.
                 </x-slot>
             </x-form-row>
 
@@ -74,7 +74,7 @@
                     </label>
 
                     <label for="bcc-local-org" class="block">
-                        <input type="checkbox" id="cc-local-org" name="cc-local-org" value="true" checked>
+                        <input type="checkbox" id="bcc-local-org" name="bcc-local-org" value="true" checked>
                         Share my email address with {{ $campaign->getOrgName() }}
                     </label>
                 </x-slot>
@@ -84,7 +84,8 @@
             </x-form-row>
 
             <div class="p-6">
-                <button type="submit" class="submit-button" :disabled="submitIsDisabled">Send Email</button>
+                @csrf
+                <button type="submit" class="submit-button" :disabled="!submitIsEnabled">Send Email</button>
             </div>
         </form>
     </div>

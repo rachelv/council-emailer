@@ -9,3 +9,6 @@ Route::get('/', [Controller::class, 'index'])
 
 Route::get('/campaign/{slug}', [CampaignController::class, 'campaign'])
     ->name('campaign');
+
+Route::post('/campaign/{slug}/send', [CampaignController::class, 'sendEmail'])
+    ->name('campaignSendEmail');

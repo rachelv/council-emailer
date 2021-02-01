@@ -25,7 +25,7 @@ class CampaignController extends Controller
         ]);
     }
 
-    public function send(string $slug)
+    public function sendEmail(string $slug)
     {
         if (!$this->isCampaignValid($slug)) {
             abort(404);
@@ -46,7 +46,7 @@ class CampaignController extends Controller
         if (!empty($fromName)) {
             $fromEmail = "{$fromName} <{$fromEmail}>";
         }
-        $headers[] = "From: {$fromEmail}";
+        $headers['From'] = $fromEmail;
 
         $subject = request()->get('subject');
 
@@ -54,13 +54,13 @@ class CampaignController extends Controller
 
         $ccSender = request()->get('cc-sender');
         if ($ccSender) {
-            $headers[] = "Cc: {$fromEmail}";
+            $headers['Cc'] = $fromEmail;
         }
 
         $bccLocalOrg = request()->get('bcc-local-org');
         if ($bccLocalOrg) {
             $orgEmail = Config::getCampaignConfig($slug, 'org-email');
-            $headers[] = "Bcc: {$orgEmail}";
+            $headers['Bcc'] = $orgEmail;
         }
 
         // ridiculously not scalable but fine for now
@@ -70,7 +70,7 @@ class CampaignController extends Controller
         }
 
         // todo: success msg
-        return request()->redirect($campaign->getUrl());
+        return redirect($campaign->getUrl());
     }
 
     private function isCampaignValid(string $slug): bool

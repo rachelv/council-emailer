@@ -10,23 +10,22 @@ new Vue({
         exampleSubjects: [],
         subject: '',
         subjectIdx: 0,
-        hasValidSubject: false,
-        hasValidMessage: false,
     },
     computed: {
-        submitIsDisabled: function() {
-            return !(this.hasValidEmail && this.hasValidSubject && this.hasValidMessage);
+        submitIsEnabled: function() {
+            return this.hasValidEmail;
         }
     },
     methods: {
         isEmailValid: function() {
-            /*
-            if (this.fromEmail.length > 6 && !this.validateEmail(this.fromEmail)) {
-
-            } else if () {
-
+            if (this.fromEmail.length > 6 && !this.validateEmail(this.fromEmail) ||
+                this.fromEmail.length <=6 && this.showEmailError) {
+                this.hasValidEmail = false;
+                this.showEmailError = true;
+            } else {
+                this.hasValidEmail = true;
+                this.showEmailError = false;
             }
-            */
         },
 
         updateSubject: function() {
