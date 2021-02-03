@@ -44,7 +44,9 @@ class CampaignController extends Controller
         //if (Env::isProd()) {
         //    $toEmails = ['rachel@magnetbox.org', 'markvanakkeren@gmail.com', 'ericbudd@gmail.com'];
         //}
-        $email->addTos($toEmails);
+        foreach ($toEmails as $toEmail) {
+            $email->addTo($toEmail);
+        }
 
         $fromEmail = request()->get('from-email');
         $fromName = request()->get('from-name');
