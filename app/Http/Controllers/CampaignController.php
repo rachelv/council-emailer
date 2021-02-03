@@ -39,7 +39,7 @@ class CampaignController extends Controller
 
         $toEmails = [request()->get('to-email')];
         //if (Env::isLocal()) {
-        $toEmails = ['rachel@magnetbox.org'];
+        $toEmails = ['rachel.vecchitto@gmail.com'];
         //}
         //if (Env::isProd()) {
         //    $toEmails = ['rachel@magnetbox.org', 'markvanakkeren@gmail.com', 'ericbudd@gmail.com'];
@@ -73,7 +73,7 @@ class CampaignController extends Controller
 
         // get 100 free email/day with sendgrid, update to use SES if that becomes a problem
         try {
-            $mailer = new SendGrid('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');
+            $mailer = new SendGrid(env('SENDGRID_API_KEY'));
             $response = $mailer->send($email);
         } catch (Exception $e) {
             // todo
