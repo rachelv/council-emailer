@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Config;
 use App\Env;
 use App\Models\Campaign;
+use Exception;
+use SendGrid;
 
 class CampaignController extends Controller
 {
@@ -33,41 +35,49 @@ class CampaignController extends Controller
 
         $campaign = Campaign::loadFromConfig($slug);
 
+        $email = new SendGrid\Mail\Mail();
+
         $toEmails = [request()->get('to-email')];
-        if (Env::isLocal()) {
-            $toEmails = ['rachel@magnetbox.org'];
-        }
-        if (Env::isProd()) {
-            $toEmails = ['rachel@magnetbox.org', 'markvanakkeren@gmail.com', 'ericbudd@gmail.com'];
-        }
+        //if (Env::isLocal()) {
+        $toEmails = ['rachel@magnetbox.org'];
+        //}
+        //if (Env::isProd()) {
+        //    $toEmails = ['rachel@magnetbox.org', 'markvanakkeren@gmail.com', 'ericbudd@gmail.com'];
+        //}
+        $email->addTos($toEmails);
 
         $fromEmail = request()->get('from-email');
         $fromName = request()->get('from-name');
-        if (!empty($fromName)) {
-            $fromEmail = "{$fromName} <{$fromEmail}>";
-        }
-        $headers['From'] = $fromEmail;
+        // from has to be our domain for spam purposes, replyto can be user's email
+        $email->setFrom('noreply@emailcitycouncil.com', $fromName);
+        $email->setReplyTo($fromEmail, $fromName);
 
         $subject = request()->get('subject');
+        $email->setSubject($subject);
 
         $message = request()->get('email-body');
+        $email->addContent('text/plain', $message);
 
         $ccSender = request()->get('cc-sender');
         if ($ccSender) {
-            $headers['Cc'] = $fromEmail;
+            $email->addCc($fromEmail);
         }
 
         $bccLocalOrg = request()->get('bcc-local-org');
         if ($bccLocalOrg) {
             $orgEmail = Config::getCampaignConfig($slug, 'org-email');
-            $headers['Bcc'] = $orgEmail;
+            $email->addBcc($orgEmail);
         }
 
-        // ridiculously not scalable but fine for now
-        // will do the work to get this on SES if it starts to matter
-        foreach ($toEmails as $toEmail) {
-            mail($toEmail, $subject, $message, $headers);
+        // get 100 free email/day with sendgrid, update to use SES if that becomes a problem
+        try {
+            $mailer = new SendGrid('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');
+            $response = $mailer->send($email);
+        } catch (Exception $e) {
+            // todo
         }
+
+        dd($response);
 
         // todo: success msg
         return redirect($campaign->getUrl());
