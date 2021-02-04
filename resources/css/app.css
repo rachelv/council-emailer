@@ -42,10 +42,6 @@ button:disabled {
     @apply rounded;
 }
 
-.text-error {
-    @apply text-red-600;
-}
-
 .error-message {
     @apply text-red-600;
     @apply text-sm;

@@ -1,6 +1,21 @@
 <x-layout>
     <x-slot name="title">{{ $campaign->getTitle() }}</x-slot>
 
+    @if(request()->session()->has('success') || request()->session()->has('error'))
+        <div class="container text-white">
+            @if(request()->session()->has('success'))
+                <div class="px-6 py-3 bg-green-500">
+                    {{ request()->session()->get('success') }}
+                </div>
+            @endif
+            @if(request()->session()->has('error'))
+                <div class="px-6 py-3 bg-red-500">
+                    {{ request()->session()->get('error') }}
+                </div>
+            @endif
+        </div>
+    @endif
+
     <div class="container p-6">
         <a class="text-sm mb-3 block" href="{{ route('index') }}">&larr; All Campaigns</a>
         <h1>{{ $campaign->getTitle() }}</h1>
@@ -23,13 +38,13 @@
             {{-- from--}}
             <x-form-row>
                 <x-slot name="form">
-                    <label :class="{ 'text-error': showEmailError }">From</label>
-                    <input type="text" name="from-name" class="mt-1 text-input" value="" placeholder="your name"/>
-                    <input v-on:keyup="isEmailValid" v-model="fromEmail" type="text" name="from-email" class="mt-1 text-input" placeholder="your email address (required)"/>
+                    <label>From</label>
+                    <input v-model="fromName" type="text" name="from-name" class="mt-1 text-input" value="" placeholder="your name (required)"/>
+                    <input v-model="fromEmail" v-on:keyup="isEmailValid" type="text" name="from-email" class="mt-1 text-input" placeholder="your email address (required)"/>
                     <div v-if="showEmailError" class="mt-1 error-message">Please enter a valid email address.</div>
                 </x-slot>
                 <x-slot name="tip">
-                    Including your real name is optional but adds credibility to your email.
+                    Including your name adds credibility to your email.
                 </x-slot>
             </x-form-row>
 
@@ -38,7 +53,7 @@
                 <x-slot name="shaded">true</x-slot>
                 <x-slot name="form">
                     <label>Subject</label>
-                    <input type="text" name="subject" class="mt-1 text-input" v-model="subject"/>
+                    <input v-model="subject" type="text" name="subject" class="mt-1 text-input"/>
                     <div class="mt-1 ml-1 text-sm"><a v-on:click.prevent="updateSubject" href="#">Use a different subject</a></div>
                 </x-slot>
                 <x-slot name="tip">
@@ -50,9 +65,7 @@
             <x-form-row>
                 <x-slot name="form">
                     <label>Message</label>
-                    <textarea name="email-body" class="mt-1 h-72 text-input">
-{{ \App\Config::getGlobalConfig('email-recipe') }}
-                    </textarea>
+                    <textarea name="email-body" class="mt-1 h-72 text-input">{{ \App\Config::getGlobalConfig('email-recipe') }}</textarea>
                 </x-slot>
                 <x-slot name="tip">
                     Talking points:

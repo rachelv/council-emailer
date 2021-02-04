@@ -38,12 +38,12 @@ class CampaignController extends Controller
         $email = new SendGrid\Mail\Mail();
 
         $toEmails = [request()->get('to-email')];
-        //if (Env::isLocal()) {
-        $toEmails = ['rachel.vecchitto@gmail.com'];
-        //}
-        //if (Env::isProd()) {
-        //    $toEmails = ['rachel@magnetbox.org', 'markvanakkeren@gmail.com', 'ericbudd@gmail.com'];
-        //}
+        if (Env::isLocal()) {
+            $toEmails = ['rachel.vecchitto@gmail.com'];
+        }
+        if (Env::isProd()) {
+            $toEmails = ['rachel.vecchitto@gmail.com', 'markvanakkeren@gmail.com', 'ericbudd@gmail.com'];
+        }
         foreach ($toEmails as $toEmail) {
             $email->addTo($toEmail);
         }
@@ -71,17 +71,21 @@ class CampaignController extends Controller
             $email->addBcc($orgEmail);
         }
 
+        $success = true;
+
         // get 100 free email/day with sendgrid, update to use SES if that becomes a problem
         try {
             $mailer = new SendGrid(env('SENDGRID_API_KEY'));
             $response = $mailer->send($email);
         } catch (Exception $e) {
-            // todo
+            $success = false;
+            request()->session()->flash('error', "There was a problem sending your email: {$e->getMessage()}");
         }
 
-        dd($response);
+        if ($success) {
+            request()->session()->flash('success', "Thanks for sending an email to city council as part of the {$campaign->getTitle()} campaign.");
+        }
 
-        // todo: success msg
         return redirect($campaign->getUrl());
     }
 

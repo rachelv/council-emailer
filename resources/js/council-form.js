@@ -3,6 +3,7 @@ import Vue from 'vue';
 new Vue({
     el: '#v-council-form',
     data: {
+        fromName: '',
         fromEmail: '',
         hasValidEmail: false,
         showEmailError: false,
@@ -13,7 +14,7 @@ new Vue({
     },
     computed: {
         submitIsEnabled: function() {
-            return this.hasValidEmail;
+            return this.hasValidEmail && this.fromName.length > 0 && this.subject.length > 0;
         }
     },
     methods: {
