@@ -73,6 +73,8 @@ class CampaignController extends Controller
 
         $success = true;
 
+        dd($email);
+
         // get 100 free email/day with sendgrid, update to use SES if that becomes a problem
         try {
             $mailer = new SendGrid(env('SENDGRID_API_KEY'));
