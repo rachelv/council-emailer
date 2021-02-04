@@ -44,7 +44,7 @@
                     <div v-if="showEmailError" class="mt-1 error-message">Please enter a valid email address.</div>
                 </x-slot>
                 <x-slot name="tip">
-                    Including your name adds credibility to your email.
+                    Including your real name adds credibility to your email.
                 </x-slot>
             </x-form-row>
 
