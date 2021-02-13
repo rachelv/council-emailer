@@ -13,10 +13,26 @@ return [
     'org-email' => 'rachel.vecchitto@gmail.com',
 
     'example-subjects' => [
-        'Hello I have thoughts on equity',
-        'Please take my email seriously',
-        'Example subject 3',
-        'Example subject 4'
+        'Racial Equity Plan',
+        'The Racial Equity Plan',
+        'the racial equity plan',
+        'The Boulder Racial Equity Plan',
+        'Racial History of the City of Boulder',
+        'The Journey Here: The Racial Equity Plan',
+        'seeking the beginnings of social justice in boulder',
+        'racial equity in boulder',
+        'Racial Equity in Boulder',
+        'Approve the Racial Equity Plan',
+        'Adopt the Racial Equity Plan',
+        'Move forward on Boulder’s Racial Equity Plan',
+        'Boulder has a choice on racial equity',
+        'Progress Boulder’s Racial Equity Plan',
+        'Boulder needs racial equity',
+        'Acknowledging our past wrongs',
+        'Coming to terms with Boulder’s past',
+        'Racial Equity in Boulder',
+        'Support the Racial Equity Plan',
+        'To move forward on Racial Equity approve the REP'
     ],
 
     'talking-points' => [
