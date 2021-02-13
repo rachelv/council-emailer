@@ -28,7 +28,10 @@
                 <x-slot name="shaded">true</x-slot>
                 <x-slot name="form">
                     <label>To</label>
-                    <input type="text" name="to-email" class="mt-1 text-input" value="{{ \App\Config::getGlobalConfig('full-council-email') }}" readonly/>
+                    <input type="text" name="to-email" class="mt-1 text-input" value="{{ implode(', ', $toEmails) }}" readonly/>
+                    @if($isTestMode)
+                        <div class="mt-1 text-green-600 text-sm">You're in test mode. Emails will not go to city council.</div>
+                    @endif
                 </x-slot>
                 <x-slot name="tip">
                     Please note that all emails to {{ \App\Config::getGlobalConfig('full-council-email') }} are public record and can be downloaded from Boulder's <a href="{{ \App\Config::getGlobalConfig('open-data-catalog-url') }}" target="_blank">Open Data Catalog</a>.

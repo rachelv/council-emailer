@@ -20,10 +20,16 @@ class CampaignController extends Controller
             abort(404);
         }
 
+        $isTestMode = $this->getIsTestMode();
+
         $campaign = Campaign::loadFromConfig($slug);
 
+        $toEmails = $this->getToEmails($isTestMode);
+
         return view('campaign.index', [
-            'campaign' => $campaign
+            'campaign' => $campaign,
+            'toEmails' => $toEmails,
+            'isTestMode' => $isTestMode,
         ]);
     }
 
@@ -33,17 +39,13 @@ class CampaignController extends Controller
             abort(404);
         }
 
+        $isTestMode = $this->getIsTestMode();
+
         $campaign = Campaign::loadFromConfig($slug);
 
         $email = new SendGrid\Mail\Mail();
 
-        $toEmails = [request()->get('to-email')];
-        if (Env::isLocal()) {
-            $toEmails = ['rachel.vecchitto@gmail.com'];
-        }
-        if (Env::isProd()) {
-            $toEmails = ['rachel.vecchitto@gmail.com', 'markvanakkeren@gmail.com', 'ericbudd@gmail.com'];
-        }
+        $toEmails = $this->getToEmails($isTestMode);
         foreach ($toEmails as $toEmail) {
             $email->addTo($toEmail);
         }
@@ -87,6 +89,28 @@ class CampaignController extends Controller
         }
 
         return redirect($campaign->getUrl());
+    }
+
+    private function getIsTestMode(): bool
+    {
+        $test = request()->get('test');
+        return boolval($test);
+    }
+
+    private function getToEmails(bool $isTestMode): array
+    {
+        // defaults to full city council
+        $toEmails = [Config::getGlobalConfig('full-council-email')];
+
+        // local: always rachel
+        if (Env::isLocal()) {
+            $toEmails = ['rachel.vecchitto@gmail.com'];
+        }
+        if (Env::isProd() && $isTestMode) {
+            $toEmails = ['rachel.vecchitto@gmail.com', 'markvanakkeren@gmail.com', 'ericbudd@gmail.com'];
+        }
+
+        return $toEmails;
     }
 
     private function isCampaignValid(string $slug): bool
