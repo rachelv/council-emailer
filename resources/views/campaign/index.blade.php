@@ -96,6 +96,9 @@
                 </x-slot>
                 <x-slot name="tip">
                     Sharing your email with {{ $campaign->getOrgName() }} ({{ $campaign->getOrgEmail() }}) helps with future organizing efforts related to this campaign.
+                    @if($isTestMode)
+                        <div class="mt-1 text-green-600 text-sm">You're in test mode. Local org will not be bcc'ed no matter what.</div>
+                    @endif
                 </x-slot>
             </x-form-row>
 
