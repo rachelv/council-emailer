@@ -42,9 +42,8 @@ return [
     ],
 
     'talking-points' => [
-        'Hello I am a talking point',
-        'Hello I am also a talking point',
-        'I am a talking point and I think I bring some very interesting things to the table',
+        'Boulder has a history of exclusion through land use',
+        'The effects of racial inequity will take a long time to undo, which is why this is a good first step',
     ],
 
     'asks' => [
