@@ -68,7 +68,7 @@
             <x-form-row>
                 <x-slot name="form">
                     <label>Message</label>
-                    <textarea name="email-body" class="mt-1 h-72 text-input">{{ \App\Config::getGlobalConfig('email-recipe') }}</textarea>
+                    <textarea name="email-body" class="mt-1 h-72 text-input" placeholder="{{ \App\Config::getGlobalConfig('email-recipe') }}"></textarea>
                 </x-slot>
                 <x-slot name="tip">
                     @if($campaign->hasReferences())
@@ -93,7 +93,7 @@
                     @endif
                     @if($campaign->hasAsks())
                         <div class="mt-2">
-                            Asks:
+                            Requests:
                             <ol class="list-decimal">
                                 @foreach ($campaign->getAsks() as $ask)
                                     <li class="ml-4">{{ $ask }}</li>
