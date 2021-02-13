@@ -71,12 +71,36 @@
                     <textarea name="email-body" class="mt-1 h-72 text-input">{{ \App\Config::getGlobalConfig('email-recipe') }}</textarea>
                 </x-slot>
                 <x-slot name="tip">
-                    Talking points:
-                    <ol class="list-decimal">
-                        @foreach ($campaign->getTalkingPoints() as $talkingPoint)
-                            <li class="ml-4">{{ $talkingPoint }}</li>
-                        @endforeach
-                    </ol>
+                    @if($campaign->hasReferences())
+                        <div class="mt-2">
+                            References:
+                            <ol class="list-decimal">
+                                @foreach ($campaign->getReferences() as $reference)
+                                    <li class="ml-4"><a href="{{ $reference[1] }}" target="_blank">{{ $reference[0] }}</a></li>
+                                @endforeach
+                            </ol>
+                        </div>
+                    @endif
+                    @if($campaign->hasTalkingPoints())
+                        <div class="mt-2">
+                            Talking points:
+                            <ol class="list-decimal">
+                                @foreach ($campaign->getTalkingPoints() as $talkingPoint)
+                                    <li class="ml-4">{{ $talkingPoint }}</li>
+                                @endforeach
+                            </ol>
+                        </div>
+                    @endif
+                    @if($campaign->hasAsks())
+                        <div class="mt-2">
+                            Asks:
+                            <ol class="list-decimal">
+                                @foreach ($campaign->getAsks() as $ask)
+                                    <li class="ml-4">{{ $ask }}</li>
+                                @endforeach
+                            </ol>
+                        </div>
+                    @endif
                 </x-slot>
             </x-form-row>
 

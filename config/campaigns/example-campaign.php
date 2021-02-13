@@ -21,9 +21,13 @@ return [
         'Example subject 6',
     ],
 
+    'references' => [],
+
     'talking-points' => [
         'Talking point 1',
         'Talking point 2',
         'Talking point 3',
     ],
+
+    'asks' => [],
 ];

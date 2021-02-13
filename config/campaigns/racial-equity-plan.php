@@ -35,9 +35,21 @@ return [
         'To move forward on Racial Equity approve the REP'
     ],
 
+    'references' => [
+        ['Housing, land use policy references retained in Boulder’s racial equity plan', 'https://boulderbeat.news/2021/02/11/racial-equity-plan-zoning/'],
+        ['Racial History of the City of Boulder', 'https://boulderbeat.news/wp-content/uploads/2021/02/Racial-history-Boulder.pdf'],
+        ['Item 5A - Racial Equity Plan Adoption', 'https://boulder.novusagenda.com/agendapublic/AttachmentViewer.ashx?AttachmentID=3893&ItemID=3482'],
+    ],
+
     'talking-points' => [
         'Hello I am a talking point',
         'Hello I am also a talking point',
         'I am a talking point and I think I bring some very interesting things to the table',
+    ],
+
+    'asks' => [
+        'Please adopt the Racial Equity Plan',
+        'Please include the critical parts about land use / racial equity',
+        'Please adopt the plan and implement it through policy',
     ],
 ];

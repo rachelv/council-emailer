@@ -14,7 +14,9 @@ class Campaign
     private string $orgName = '';
     private string $orgEmail = '';
     private array $exampleSubjects = [];
+    private array $references = [];
     private array $talkingPoints = [];
+    private array $asks = [];
 
     public static function loadFromConfig(string $slug): Campaign
     {
@@ -25,7 +27,9 @@ class Campaign
         $campaign->setOrgName(Config::getCampaignConfig($slug, 'org-name'));
         $campaign->setOrgEmail(Config::getCampaignConfig($slug, 'org-email'));
         $campaign->setExampleSubjects(Config::getCampaignConfig($slug, 'example-subjects'));
+        $campaign->setReferences(Config::getCampaignConfig($slug, 'references'));
         $campaign->setTalkingPoints(Config::getCampaignConfig($slug, 'talking-points'));
+        $campaign->setAsks(Config::getCampaignConfig($slug, 'asks'));
 
         return $campaign;
     }
@@ -100,6 +104,21 @@ class Campaign
         return json_encode($this->exampleSubjects);
     }
 
+    public function setAsks(array $asks): void
+    {
+        $this->asks = $asks;
+    }
+
+    public function getAsks(): Collection
+    {
+        return collect($this->asks);
+    }
+
+    public function hasAsks(): bool
+    {
+        return count($this->asks) > 0;
+    }
+
     public function setTalkingPoints(array $talkingPoints): void
     {
         $this->talkingPoints = $talkingPoints;
@@ -108,5 +127,25 @@ class Campaign
     public function getTalkingPoints(): Collection
     {
         return collect($this->talkingPoints);
+    }
+
+    public function hasTalkingPoints(): bool
+    {
+        return count($this->talkingPoints) > 0;
+    }
+
+    public function setReferences(array $references): void
+    {
+        $this->references = $references;
+    }
+
+    public function getReferences(): Collection
+    {
+        return collect($this->references);
+    }
+
+    public function hasReferences(): bool
+    {
+        return count($this->references) > 0;
     }
 }
