@@ -68,7 +68,7 @@
             <x-form-row>
                 <x-slot name="form">
                     <label>Message</label>
-                    <textarea name="email-body" class="mt-1 h-72 text-input" placeholder="{{ \App\Config::getGlobalConfig('email-recipe') }}"></textarea>
+                    <textarea name="email-body" class="mt-1 h-96 text-input" placeholder="{{ \App\Config::getGlobalConfig('email-recipe') }}"></textarea>
                 </x-slot>
                 <x-slot name="tip">
                     @if($campaign->hasReferences())
