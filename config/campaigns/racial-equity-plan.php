@@ -9,8 +9,8 @@ return [
     'title' => 'Racial Equity Plan',
 
     // local organization that's working on this issue
-    'org-name' => 'Local Racial Equity Group',
-    'org-email' => 'rachel.vecchitto@gmail.com',
+    'org-name' => 'Bedrooms Are For People',
+    'org-email' => 'bedroomsareforpeople@gmail.com',
 
     'example-subjects' => [
         'Racial Equity Plan',
@@ -42,8 +42,15 @@ return [
     ],
 
     'talking-points' => [
-        'Boulder has a history of exclusion through land use',
-        'The effects of racial inequity will take a long time to undo, which is why this is a good first step',
+        'Boulder has a history of exclusion through land use.',
+        'The effects of racial inequity will take a long time to undo, which is why this is a good first step.',
+        '"Actions ranged from unquestionably racist to well-meaning and popularly supported but lacking consideration of long-term, unintended consequences." [3]',
+        '"To be clear, this plan does not advocate for reversing past policy decisions ... Rather, the challenge now is to ensure our policies reflect all community values, including environmental protection, quality of life and racial and socioeconomic equity." [3]',
+        '"The City of Boulder has historically leveraged its local resources to push policy efforts upwards to effect systemic change." [3]',
+        '"Like climate policy and policies that address root causes of homelessness, both rooted in consequences of past policy decisions, the city\'s efforts to address Racial Equity should be part of a broader regional, state and national effort." [3]',
+        '"We cannot and should not do this alone. We must work together to accomplish scalable change to rectify a system that, for too long, has continued to cause so much harm." [3]',
+        '"During the first half of the 20th century, explicit racism gave way to more implicit forms of racism, legally continuing racial and socio-economic segregation." [3]',
+        '"Local policies are and have been more nuanced, but often still lead to similar disparate impacts as those of explicitly discriminatory policies." [3]',
     ],
 
     'asks' => [
