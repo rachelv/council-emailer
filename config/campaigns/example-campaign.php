@@ -8,9 +8,10 @@ return [
     // name of this letter writing campaign
     'title' => 'Example Campaign',
 
-    // local organization that's working on this issue
-    'org-name' => 'Local group working on this cause',
-    'org-email' => 'local.group.email@gmail.com',
+    // local organizations working on this issue
+    'local-orgs' => [
+        ['Org Name', 'org-email@gmail.com', 'https://www.org-website.com/'],
+    ],
 
     'example-subjects' => [
         'Example subject 1',

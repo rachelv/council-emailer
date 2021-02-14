@@ -69,8 +69,10 @@ class CampaignController extends Controller
 
         $bccLocalOrg = request()->get('bcc-local-org');
         if ($bccLocalOrg && !$isTestMode) {
-            $orgEmail = Config::getCampaignConfig($slug, 'org-email');
-            $email->addBcc($orgEmail);
+            $localOrgs = $campaign->getLocalOrgs();
+            foreach ($localOrgs as $localOrg) {
+                $email->addBcc($localOrg[1]);
+            }
         }
 
         $success = true;

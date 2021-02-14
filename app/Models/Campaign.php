@@ -11,8 +11,7 @@ class Campaign
     private bool $active = false;
     private string $title = '';
     private string $slug = '';
-    private string $orgName = '';
-    private string $orgEmail = '';
+    private array $localOrgs = [];
     private array $exampleSubjects = [];
     private array $references = [];
     private array $talkingPoints = [];
@@ -24,8 +23,7 @@ class Campaign
         $campaign->setSlug($slug);
         $campaign->setActive(boolval(Config::getCampaignConfig($slug, 'active')));
         $campaign->setTitle(Config::getCampaignConfig($slug, 'title'));
-        $campaign->setOrgName(Config::getCampaignConfig($slug, 'org-name'));
-        $campaign->setOrgEmail(Config::getCampaignConfig($slug, 'org-email'));
+        $campaign->setLocalOrgs(Config::getCampaignConfig($slug, 'local-orgs'));
         $campaign->setExampleSubjects(Config::getCampaignConfig($slug, 'example-subjects'));
         $campaign->setReferences(Config::getCampaignConfig($slug, 'references'));
         $campaign->setTalkingPoints(Config::getCampaignConfig($slug, 'talking-points'));
@@ -69,24 +67,14 @@ class Campaign
         return $this->title;
     }
 
-    public function setOrgName(string $orgName): void
+    public function setLocalOrgs(array $localOrgs): void
     {
-        $this->orgName = $orgName;
+        $this->localOrgs = $localOrgs;
     }
 
-    public function getOrgName(): string
+    public function getLocalOrgs(): Collection
     {
-        return $this->orgName;
-    }
-
-    public function setOrgEmail(string $orgEmail): void
-    {
-        $this->orgEmail = $orgEmail;
-    }
-
-    public function getOrgEmail(): string
-    {
-        return $this->orgEmail;
+        return collect($this->localOrgs);
     }
 
     public function setExampleSubjects(array $exampleSubjects): void

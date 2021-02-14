@@ -115,11 +115,19 @@
 
                     <label for="bcc-local-org" class="block">
                         <input type="checkbox" id="bcc-local-org" name="bcc-local-org" value="true" checked>
-                        Share my email address with {{ $campaign->getOrgName() }}
+                        Share my email address with local organizations working on this issue
                     </label>
                 </x-slot>
                 <x-slot name="tip">
-                    Sharing your email with {{ $campaign->getOrgName() }} ({{ $campaign->getOrgEmail() }}) helps with future organizing efforts related to this campaign.
+                    Sharing your email with local organizations helps with future organizing efforts related to this issue.
+                    <div class="mt-2">
+                        By checking this box, your email will be shared with:
+                        <ol class="list-decimal">
+                            @foreach ($campaign->getLocalOrgs() as $localOrg)
+                                <li class="ml-4"><a href="{{ $localOrg[2] }}" target="_blank">{{ $localOrg[0] }}</a> ({{ $localOrg[1] }})</li>
+                            @endforeach
+                        </ol>
+                    </div>
                     @if($isTestMode)
                         <div class="mt-1 text-green-600 text-sm">You're in test mode. Local org will not be bcc'ed no matter what.</div>
                     @endif

@@ -8,9 +8,11 @@ return [
     // name of this letter writing campaign
     'title' => 'Racial Equity Plan',
 
-    // local organization that's working on this issue
-    'org-name' => 'Bedrooms Are For People',
-    'org-email' => 'bedroomsareforpeople@gmail.com',
+    // local organizations working on this issue
+    'local-orgs' => [
+        ['Bedrooms Are For People', 'bedroomsareforpeople@gmail.com', 'https://www.bedroomsareforpeople.com/'],
+        ['Boulder Progressives', 'boulderprogressives@gmail.com', 'https://boulderprogressives.org/'],
+    ],
 
     'example-subjects' => [
         'Racial Equity Plan',
